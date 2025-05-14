@@ -1,20 +1,17 @@
 const express = require('express');
 const cors = require('cors');
-const { graphQLHTTP } = require('graphql-http')
+require('dotenv').config();
 
-const mongoose = require("mongoose");
-// const connectDB = require('./config/db');
-// const schema = require('./graphql/schema');
-// const resolvers = require('./graphql/resolvers');
+const app = express();
+const PORT = process.env.PORT || 5110;
 
-var app = express()
-app.use(cors)
+app.use(cors());
 
-mongoose.connect("mongodb://127.0.0.1:27017/facebook", {
-    	useNewUrlParser : true,
-        useCreateIndex : true,
-    }).then(()=>{
-    	console.log("[===MongoDB에 연결되었습니다.===]");
-    }).catch((err)=>{
-    	console.error(err);
-    });
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(PORT, () => {
+  console.log(`✅ Server running at:`);
+  console.log(`http://localhost:${PORT}`);
+});
