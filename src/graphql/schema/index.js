@@ -1,10 +1,9 @@
-// src/graphql/schema/index.js
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type Query {
     "환율조회"
-    getExchangeRate(src: String!, tgt: String!): ExchangeInfo
+    getExchangeRate(src:String!, tgt:String!): ExchangeInfo
   }
 
   type Mutation {
@@ -37,7 +36,7 @@ const typeDefs = gql`
   }
 
   "환율정보"
-  type ExchangeInfo {
+  type ExchangeInfo @key(fields: "src, tgt") {
     "소스통화"
     src: String!
     "타겟통화"

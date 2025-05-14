@@ -1,17 +1,37 @@
 const express = require('express');
 const cors = require('cors');
+const { ApolloServer, gql } = require('apollo-server-express');
+const { buildSubgraphSchema } = require('@apollo/subgraph');
 require('dotenv').config();
+const mongoose = require('mongoose');
+const resolvers = require('../src/graphql/resolvers'); // 리졸버 경로
+const typeDefs = require('../src/graphql/schema');    // 스키마 경로
+const { makeExecutableSchema } = require('@graphql-tools/schema');
 
 const app = express();
 const PORT = process.env.PORT || 5110;
 
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+// Apollo Server 생성
+const server = new ApolloServer({
+  schema: buildSubgraphSchema({ typeDefs, resolvers }),
+  playground: true,
+  context: ({ req, res }) => ({ req, res }),
+  formatError: (err) => {
+    console.log(err);
+    return err;
+  }
 });
 
+const con = async () => {
+  await server.start();
+  server.applyMiddleware({ app, path: "/graphql" });
+}
+
+con();
+
 app.listen(PORT, () => {
-  console.log(`✅ Server running at:`);
+  console.log(`Server running at:`);
   console.log(`http://localhost:${PORT}`);
 });
