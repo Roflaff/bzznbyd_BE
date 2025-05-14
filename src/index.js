@@ -5,10 +5,11 @@ const { buildSubgraphSchema } = require('@apollo/subgraph');
 require('dotenv').config();
 const resolvers = require('../src/graphql/resolvers'); // 리졸버 경로
 const typeDefs = require('../src/graphql/schema');    // 스키마 경로
+const connectDB = require('../src/db/connect');
 
 const app = express();
 const PORT = process.env.PORT || 5110;
-
+connectDB();
 app.use(cors());
 
 // Apollo Server 생성
