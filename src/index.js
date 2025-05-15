@@ -32,5 +32,5 @@ con();
 
 app.listen(PORT, () => {
   console.log(`Server running at:`);
-  console.log(`http://localhost:${PORT}`);
+  console.log(`http://localhost:${PORT}/graphql`);
 });
