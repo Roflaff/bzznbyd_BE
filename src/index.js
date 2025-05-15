@@ -16,6 +16,7 @@ app.use(cors());
 const server = new ApolloServer({
   schema: buildSubgraphSchema({ typeDefs, resolvers }),
   playground: true,
+  persistedQueries: false,
   context: ({ req, res }) => ({ req, res }),
   formatError: (err) => {
     console.log(err);
@@ -25,7 +26,7 @@ const server = new ApolloServer({
 
 const con = async () => {
   await server.start();
-  server.applyMiddleware({ app, path: "/graphql" });
+  server.applyMiddleware({ app, path: "/graphql", cors: { origin: 'http://localhost:${PORT}', credentials: true} });
 }
 
 con();
