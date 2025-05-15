@@ -3,8 +3,8 @@ const cors = require('cors');
 const { ApolloServer, gql } = require('apollo-server-express');
 const { buildSubgraphSchema } = require('@apollo/subgraph');
 require('dotenv').config();
-const resolvers = require('../src/graphql/resolvers'); // 리졸버 경로
-const typeDefs = require('../src/graphql/schema');    // 스키마 경로
+const resolvers = require('../src/graphql/resolvers');
+const typeDefs = require('../src/graphql/schema');
 const connectDB = require('../src/db/connect');
 
 const app = express();
@@ -31,6 +31,6 @@ const con = async () => {
 con();
 
 app.listen(PORT, () => {
-  console.log(`✅ Server running at:`);
+  console.log(`Server running at:`);
   console.log(`http://localhost:${PORT}`);
 });
