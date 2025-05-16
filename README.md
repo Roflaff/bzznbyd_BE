@@ -5,7 +5,7 @@
 
 ---
 
-## 배포 주소
+## 실행 방법
 
 - GraphQL 서버 (Cloudtype):
   `https://port-0-bzznbyd-be-mamf4e5w533169a8.sel4.cloudtype.app/graphql`
@@ -13,9 +13,23 @@
 - OR 로컬 서버:
   `http://localhost:5110/graphql`
 
+```bash
+# 1. 레포지토리 클론
+git clone https://github.com/Roflaff/bzznbyd_BE.git
+
+# 2. 패키지 설치
+npm install
+
+# 3. 서버 실행 (리눅스 기준)
+cd src
+npm start
+```
+
+- or <code>curl</code> to send HTTP
 ---
 
 ## 주요 기능
+
 
 ### 환율 등록 (Mutation)
 
@@ -23,16 +37,7 @@
 curl -XPOST "https://port-0-bzznbyd-be-mamf4e5w533169a8.sel4.cloudtype.app/graphql" --silent \
 -H "accept: application/json" \
 -H "Content-Type: application/json" \
--d '{
-  "query": "mutation { \
-    r1: postExchangeRate(info: { src: \"krw\", tgt: \"usd\", rate: 1350.5, date: \"2025-05-15\" }) { src tgt rate date } \
-    r2: postExchangeRate(info: { src: \"krw\", tgt: \"usd\", rate: 1348.2, date: \"2025-05-14\" }) { src tgt rate date } \
-    r3: postExchangeRate(info: { src: \"krw\", tgt: \"usd\", rate: 1351.0, date: \"2025-05-13\" }) { src tgt rate date } \
-    r4: postExchangeRate(info: { src: \"krw\", tgt: \"usd\", rate: 1347.3, date: \"2025-05-12\" }) { src tgt rate date } \
-    r5: postExchangeRate(info: { src: \"krw\", tgt: \"usd\", rate: 1349.9, date: \"2025-05-11\" }) { src tgt rate date } \
-    r6: postExchangeRate(info: { src: \"krw\", tgt: \"usd\", rate: 1352.4, date: \"2025-05-10\" }) { src tgt rate date } \
-  }"
-}' | jq
+-d '{"query":"mutation { postExchangeRate(info: { src: \"krw\", tgt: \"usd\", rate: 1350.5, date: \"2025-05-15\" }) { src tgt rate date } }"}' | jq
 ```
 
 ### 환율 조회
@@ -76,6 +81,7 @@ curl -XPOST "https://port-0-bzznbyd-be-mamf4e5w533169a8.sel4.cloudtype.app/graph
 
 ```
 #### RESULT_SEARCH 2
+
 ```bash
 curl -XPOST "https://port-0-bzznbyd-be-mamf4e5w533169a8.sel4.cloudtype.app/graphql" --silent \
 -H  "accept: application/json" \
@@ -87,3 +93,4 @@ curl -XPOST "https://port-0-bzznbyd-be-mamf4e5w533169a8.sel4.cloudtype.app/graph
 ' | jq
 
 ```
+
