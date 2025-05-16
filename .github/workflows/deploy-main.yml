@@ -28,6 +28,8 @@ jobs:
               env:
                 - name: PORT
                   value: "5110"
+                - name: MONGO_URI
+                  value: ${{ secrets.MONGO_URI }}
               buildenv: []
             context:
               git:
