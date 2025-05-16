@@ -3,6 +3,15 @@ const ExchangeRate = require('../../models/ExchangeRate');
 const resolvers = {
   Query: {
     async getExchangeRate(_, { src, tgt }) {
+      if (src === tgt) {
+        return {
+          src,
+          tgt,
+          rate: 1, // 같은 통화에 대해서는 비율이 1
+          date: new Date().toISOString().slice(0, 10) // 오늘 날짜 반환
+        };
+      }
+
       const latest = await ExchangeRate.findOne({ src, tgt }).sort({ date: -1 }).exec();
       return latest;
     }
