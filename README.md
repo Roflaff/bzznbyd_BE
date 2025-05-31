@@ -1,6 +1,5 @@
-# bzznbyd_BE
+# GraphQL + MongoDB CRUD ex
 
-## BE개발자 구현과제#02 - GraphQL + MongoDB CRUD  
 **김선표 KIN SEON PYO**
 
 ---
